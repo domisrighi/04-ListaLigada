@@ -73,7 +73,7 @@ void menu()
 void inicializar()
 {
 
-	// se a lista j· possuir elementos
+	// se a lista j√° possuir elementos
 	// libera a memoria ocupada
 	NO* aux = primeiro;
 	while (aux != NULL) {
@@ -87,8 +87,8 @@ void inicializar()
 
 }
 
-void exibirQuantidadeElementos() {
-
+void exibirQuantidadeElementos() 
+{
 	int nElementos = 0;
 	NO* aux = primeiro;
 	while (aux != NULL) {
@@ -145,18 +145,49 @@ void inserirElemento()
 
 void excluirElemento()
 {
-	
+	int inputValue;
+	cout << "Digite o valor que deseja excluir: ";
+	cin >> inputValue;
+
+	NO* aux = primeiro;
+	while (aux->prox != NULL) {
+		NO* nextElement = aux->prox;
+
+		if (primeiro->valor == inputValue) {
+			free(primeiro);
+			primeiro = nextElement;
+			break;
+		}
+
+		if(nextElement->valor == inputValue) {
+			aux->prox = nextElement->prox;
+
+			free(nextElement);
+			break;
+		}
+		aux = aux->prox;
+	}
 }
 
 void buscarElemento()
 {
-	
+	int inputValue;
+	cout << "Digite o valor que deseja excluir: ";
+	cin >> inputValue;
+
+	NO* element = posicaoElemento(inputValue);
+
+	if(element == NULL) {
+		cout << "Nenhum elemento igual a esse valor foi localizado.";
+		return;
+	}
+
+	cout << element->valor;
 }
 
 
-
 // retorna um ponteiro para o elemento buscado
-// ou NULL se o elemento n„o estiver na lista
+// ou NULL se o elemento n√£o estiver na lista
 NO* posicaoElemento(int numero)
 {
 	NO* aux = primeiro;
